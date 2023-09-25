@@ -1,0 +1,22 @@
+##Code for the Wildfires
+##this was done in python
+##importing what I think I need
+import pandas as pd
+file_path = 'CA_wildfires.csv'
+fire = pd.read_csv('CA_wildfires.csv')
+
+fire.head(5)
+
+fire.columns
+
+##dropping columns I do not need
+columns_to_drop=(['DISCOVERY_TIME','DISCOVERY_DATE','DISCOVERY_DOY','DISCOVERY_TIME','CONT_DATE', 'CONT_DOY','CONT_TIME',])
+fire.drop(columns=columns_to_drop, axis=1, inplace=True)
+fire.head()
+
+##trying out code to try to drop rows with all columns because I noticed that there are zeros for latitude or longitude typed in instead of the actual cooridinates 
+fire.dropna(axis=0, how='all', subset=['LONGITUDE','LATITUDE'], inplace=True)
+
+fire.head()
+
+fire.to_excel('wildfires_clean11.xlsx')
